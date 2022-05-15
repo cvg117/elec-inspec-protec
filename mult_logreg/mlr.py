@@ -1,14 +1,15 @@
 import csv
 import pandas as pd
 import numpy as np
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
 
 
-training = pd.read_csv('filename').to_numpy()
-training_x, training_y = training.iloc[:,:-1], training.iloc[:,-1] 
-testing = pd.read_csv('filename').to_numpy()
-testing_x, testing_y = testing.iloc[:,:-1], testing.iloc[:,-1] 
+county_arr = pd.read_csv('../data/mi_matched_county.csv').to_numpy()
+training, testing = train_test_split(county_arr)
+training_x, training_y = training[:,:-1], training[:,-1]
+testing_x, testing_y = testing[:,:-1], testing[:,-1] 
 
 
 logreg = LogisticRegression(multi_class='multinomial', solver='lbfgs')
